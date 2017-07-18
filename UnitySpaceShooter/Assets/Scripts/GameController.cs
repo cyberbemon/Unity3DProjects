@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public float spawnWait;
     public float startWait;
     public float waveWait;
+    private int waveNumber;
 
     private void Start()
     {
@@ -29,6 +30,8 @@ public class GameController : MonoBehaviour {
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
+            
+            //Debug.Log(-waveNumber);
         }
     }
 
