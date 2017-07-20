@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
 
-    public GameObject hazard;
+    public GameObject[] hazards;
     public GUIText scoreText;
     public GUIText restartText;
     public GUIText gameOverText;
@@ -34,8 +34,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("calling update " +gameOver);
-        Debug.Log("calling update " + restart);
         if (restart)
         {
             if(Input.GetKeyDown(KeyCode.R))
@@ -52,6 +50,7 @@ public class GameController : MonoBehaviour
         {
             for (int i = 0; i < hazardCount; i++)
             {
+                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(hazard, spawnPosition, spawnRotation);
@@ -82,7 +81,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("GameOVer called");
+       
         gameOverText.text = "GAME OVER";
         gameOver = true;
     }
