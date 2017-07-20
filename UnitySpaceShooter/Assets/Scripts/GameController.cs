@@ -1,22 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public GameObject hazard;
+    public GUIText scoreText;
+    public GUIText restartText;
+    public GUIText gameOverText;
+
     public Vector3 spawnValues;
     public int hazardCount;
     public float spawnWait;
     public float startWait;
     public float waveWait;
-    private int waveNumber;
 
-    private void Start()
+    private int score;
+    private bool gameOver;
+    private bool restart;
+
+    void Start()
     {
+        gameOver = false;
+        restart = false;
+        restartText.text = "";
+        gameOverText.text = "";
+        score = 0;
+        UpdateScore();
         StartCoroutine (SpawnWaves());
     }
 
+    void Update()
+    {
+        Debug.Log("calling update " +gameOver);
+        Debug.Log("calling update " + restart);
+        if (restart)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+    }
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(spawnWait);
@@ -30,9 +58,32 @@ public class GameController : MonoBehaviour {
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
-            
-            //Debug.Log(-waveNumber);
+
+            if (gameOver)
+            {
+                
+                restartText.text = "Press R for Restart";
+                restart = true;
+                break;
+            }
         }
     }
 
+    public void AddScore(int newScoreValue)
+    {
+        score += newScoreValue;
+        UpdateScore();
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = "Score: " + score;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("GameOVer called");
+        gameOverText.text = "GAME OVER";
+        gameOver = true;
+    }
 }
