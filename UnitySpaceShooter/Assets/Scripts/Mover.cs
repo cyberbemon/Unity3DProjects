@@ -7,6 +7,9 @@ public class Mover : MonoBehaviour {
     private Rigidbody rb;
     public float speed;
 
+    /// <summary>
+    /// Moves the bolt forward with a given speed.
+    /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
