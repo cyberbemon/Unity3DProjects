@@ -4,4 +4,6 @@ Here are the list of projects.
 
 * AStarPathFinding - A very basic implementation of A* pathfinding in Unity.
 * AStarPathFindingHeapOptimized - A* pathfinding with heap optimization.
+* AStarPathfindingForUnits - A* pathfinding for multiple units. 
 * UnitySpaceShooter - W.I.P game, where the player shoots asteroids or enemies. Did it as a part of unity training. 
+
